@@ -3,6 +3,7 @@ import { authOptions } from "../../lib/auth";
 import { prisma } from "../../lib/prisma";
 import ExpenseForm from "../../components/ExpenseForm";
 import ExpenseCharts from "../../components/ExpenseCharts";
+import AIAssistantPanel from "../../components/AIAssistantPanel";
 
 export const dynamic = "force-dynamic";
 
@@ -280,6 +281,10 @@ export default async function DashboardPage() {
                 <ExpenseForm />
               </div>
             </div>
+
+            <section className="mt-6">
+  <AIAssistantPanel/>
+</section>
           </div>
 
           <div className="flex flex-col gap-4">
@@ -361,6 +366,7 @@ export default async function DashboardPage() {
                 )}
               </ul>
             </div>
+
           </div>
         </section>
       </div>
