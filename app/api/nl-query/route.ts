@@ -19,7 +19,6 @@ export async function POST(req: Request) {
     const user = await prisma.user.findUnique({ where: { email: session?.user?.email } });
     if (!user) return NextResponse.json({ error: "User not found" }, { status: 404 });
 
-    // Build context: aggregate last 6 months totals & top categories
     const sixMonthsAgo = new Date();
     sixMonthsAgo.setMonth(sixMonthsAgo.getMonth() - 6);
 
@@ -28,7 +27,6 @@ export async function POST(req: Request) {
       orderBy: { date: "desc" }
     });
 
-    // aggregate monthly totals and top categories
     const monthlyTotals: Record<string, number> = {};
     const categoryTotals: Record<string, number> = {};
     expenses.forEach((e:any) => {
