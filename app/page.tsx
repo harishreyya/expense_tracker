@@ -5,15 +5,22 @@ import { motion } from "framer-motion";
 
 export default function Home() {
   return (
-    <main className="relative min-h-screen overflow-hidden bg-slate-950 px-4 pb-10 pt-16">
+    <main className="relative min-h-screen overflow-hidden px-4 pb-10 pt-20">
       <div className="pointer-events-none absolute inset-0">
-        <div className="absolute -left-24 top-[-10%] h-72 w-72 rounded-full bg-sky-500/25 blur-3xl" />
+        <div className="absolute -left-24 top-[-15%] h-72 w-72 rounded-full bg-sky-500/25 blur-3xl" />
         <div className="absolute right-[-10%] top-[25%] h-64 w-64 rounded-full bg-emerald-400/20 blur-3xl" />
         <div className="absolute bottom-[-10%] left-[20%] h-80 w-80 rounded-full bg-sky-600/10 blur-3xl" />
       </div>
 
-      <div className="pointer-events-none absolute inset-0 bg-[radial-gradient(circle_at_top,_#0f172a_0,_transparent_60%)] opacity-70" />
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(to_bottom,rgba(15,23,42,0.9),rgba(15,23,42,0.96))]" />
+      <div
+        className="pointer-events-none absolute inset-0"
+        style={{
+          backgroundImage:
+            "radial-gradient(circle at top, rgba(56,189,248,0.18) 0, transparent 55%)," +
+            "radial-gradient(circle at bottom, rgba(16,185,129,0.16) 0, transparent 55%)," +
+            "linear-gradient(to bottom, #020617, #020617)"
+        }}
+      />
 
       <div className="relative z-10 mx-auto flex max-w-6xl flex-col gap-10">
         <div className="flex items-center justify-between gap-3 text-[11px] text-slate-400">

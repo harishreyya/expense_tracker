@@ -12,7 +12,7 @@ interface ProvidersProps {
 export default function Providers({ children, session }: ProvidersProps) {
   return (
     <SessionProvider session={session}>
-      <div className="min-h-screen bg-slate-50">
+      <div className="bg-slate-950 text-slate-50 antialiased">
         <Header />
         {children}
       </div>
