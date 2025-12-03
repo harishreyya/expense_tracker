@@ -2,8 +2,22 @@
 
 import Link from "next/link";
 import { motion } from "framer-motion";
+import { useSession } from "next-auth/react";
 
 export default function Home() {
+  const { data: session, status } = useSession();
+  const isAuthed = status === "authenticated";
+
+  const primaryCtaLabel = isAuthed ? "Continue to dashboard" : "Open dashboard";
+  const secondaryCtaHref = isAuthed ? "/settings" : "/auth";
+  const secondaryCtaLabel = isAuthed ? "Account settings" : "Sign in / Sign up";
+
+  const sideCardBottomHref = isAuthed ? "/dashboard" : "/auth";
+  const sideCardBottomTitle = isAuthed ? "You’re signed in" : "Sign in securely";
+  const sideCardBottomSubtitle = isAuthed
+    ? "Jump straight into your dashboard and tweak your settings anytime."
+    : "Email/password or Google via NextAuth.";
+
   return (
     <main className="relative min-h-screen overflow-hidden px-4 pb-10 pt-20">
       <div className="pointer-events-none absolute inset-0">
@@ -68,15 +82,15 @@ export default function Home() {
                 href="/dashboard"
                 className="inline-flex items-center justify-center rounded-2xl bg-sky-500 px-4 py-2.5 text-sm font-medium text-slate-950 shadow-[0_12px_30px_rgba(56,189,248,0.35)] transition hover:bg-sky-400 hover:shadow-[0_14px_36px_rgba(56,189,248,0.55)]"
               >
-                Open dashboard
+                {primaryCtaLabel}
                 <span className="ml-1.5 text-[13px]">↗</span>
               </Link>
 
               <Link
-                href="/auth"
+                href={secondaryCtaHref}
                 className="inline-flex items-center justify-center rounded-2xl border border-slate-700 bg-slate-950/50 px-4 py-2.5 text-sm font-medium text-slate-100 shadow-sm transition hover:border-sky-500 hover:bg-slate-900"
               >
-                Sign in / Sign up
+                {secondaryCtaLabel}
               </Link>
 
               <span className="text-[11px] text-slate-500">
@@ -165,7 +179,7 @@ export default function Home() {
               </div>
 
               <Link
-                href="/auth"
+                href={sideCardBottomHref}
                 className="group mt-1 flex items-center justify-between gap-3 rounded-2xl bg-slate-900/70 px-3 py-2.5 text-[11px] text-slate-300 ring-1 ring-slate-700/80 transition hover:bg-slate-900 hover:ring-sky-500/80"
               >
                 <div className="flex items-center gap-2">
@@ -173,14 +187,12 @@ export default function Home() {
                     🔐
                   </span>
                   <div className="flex flex-col">
-                    <span className="font-medium text-slate-100">Sign in securely</span>
-                    <span className="text-[10px] text-slate-400">
-                      Email/password or Google via NextAuth.
-                    </span>
+                    <span className="font-medium text-slate-100">{sideCardBottomTitle}</span>
+                    <span className="text-[10px] text-slate-400">{sideCardBottomSubtitle}</span>
                   </div>
                 </div>
                 <span className="text-[11px] text-slate-500 group-hover:text-sky-300">
-                  Continue
+                  {isAuthed ? "Dashboard" : "Continue"}
                 </span>
               </Link>
             </div>

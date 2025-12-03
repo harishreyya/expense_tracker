@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useSession, signIn, signOut } from "next-auth/react";
@@ -15,21 +15,21 @@ const navItems = [
 
 function isActive(pathname: string, href: string) {
   if (href === "/dashboard") {
-    return pathname === "/" || pathname.startsWith("/dashboard");
+    return pathname.startsWith("/dashboard");
   }
   return pathname.startsWith(href);
 }
 
 export default function Header() {
-  const pathname = usePathname();
+  const rawPathname = usePathname();
+  const pathname = rawPathname || "/";
   const { data: session, status } = useSession();
   const [open, setOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-30 border-b border-slate-800/70 bg-slate-950/70 backdrop-blur-lg">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-4 py-3 md:px-6">
-      
-        <Link href="/dashboard" className="flex items-center gap-3">
+        <Link href="/" className="flex items-center gap-3">
           <div className="relative flex h-9 w-9 items-center justify-center rounded-2xl bg-slate-900 text-sky-300 shadow-[0_10px_30px_rgba(15,23,42,0.75)] ring-1 ring-slate-700">
             <span className="text-lg font-bold">₹</span>
             <div className="pointer-events-none absolute inset-0 rounded-2xl bg-sky-500/30 blur-md opacity-0 transition group-hover:opacity-100" />
@@ -44,7 +44,7 @@ export default function Header() {
           </div>
         </Link>
 
-     
+        {/* Desktop nav */}
         <nav className="hidden items-center gap-1 rounded-full bg-slate-900/70 px-1 py-1 text-sm ring-1 ring-slate-700 md:flex">
           {navItems.map((item) => {
             const active = isActive(pathname, item.href);
@@ -65,7 +65,6 @@ export default function Header() {
           })}
         </nav>
 
-     
         <div className="flex items-center gap-3">
           {status === "authenticated" && session?.user && (
             <div className="hidden flex-col items-end text-right text-[11px] leading-tight text-slate-300 sm:flex">
@@ -89,9 +88,7 @@ export default function Header() {
               type="button"
               className="hidden rounded-2xl bg-slate-50 px-3 py-1.5 text-xs font-medium text-slate-900 shadow-sm transition hover:bg-sky-100 md:inline-flex"
             >
-                <Link href="/auth">
-                 Sign in
-                  </Link>
+              <Link href="/auth">Sign in</Link>
             </button>
           )}
 
@@ -183,9 +180,7 @@ export default function Header() {
                     }}
                     className="ml-auto rounded-2xl bg-slate-50 px-3 py-1.5 text-[11px] font-medium text-slate-900 shadow-sm hover:bg-sky-100"
                   >
-                    <Link href="/auth">
-                 Sign in
-                  </Link>
+                    <Link href="/auth">Sign in</Link>
                   </button>
                 )}
               </div>

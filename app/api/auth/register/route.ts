@@ -31,13 +31,11 @@ export async function POST(req: Request) {
       );
     }
 
-    // Check if a user already exists with this email
     const existingUser = await prisma.user.findUnique({
       where: { email }
     });
 
     if (existingUser && existingUser.hashedPassword) {
-      // Fully registered credentials user already exists
       return NextResponse.json(
         { error: "An account with this email already exists." },
         { status: 409 }
@@ -49,7 +47,6 @@ export async function POST(req: Request) {
     let user;
 
     if (existingUser && !existingUser.hashedPassword) {
-      // User was created via OAuth (e.g., Google); attach a password to that account
       user = await prisma.user.update({
         where: { email },
         data: {
@@ -58,7 +55,6 @@ export async function POST(req: Request) {
         }
       });
     } else {
-      // Brand new user
       user = await prisma.user.create({
         data: {
           email,

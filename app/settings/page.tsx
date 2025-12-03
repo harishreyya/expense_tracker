@@ -46,18 +46,6 @@ export default async function Settings() {
     where: { email: session?.user?.email }
   });
 
-  // const initials =
-  //   user?.name
-  //     ?.split(" ")
-  //     .map((p:any) => p[0])
-  //     .join("")
-  //     .slice(0, 2)
-  //     .toUpperCase() ||
-  //       {/* @ts-ignore */}
-  //   session?.user?.email
-  //     .slice(0, 2)
-  //     .toUpperCase();
-
   const initials = (() => {
     if (user?.name && typeof user.name === "string") {
       return user.name
@@ -78,13 +66,11 @@ export default async function Settings() {
 
   return (
     <main className="relative min-h-screen bg-slate-50 px-4 pb-12 pt-16">
-      {/* Ambient halo */}
       <div className="pointer-events-none absolute inset-x-0 top-10 flex justify-center">
         <div className="h-24 w-[70%] max-w-3xl rounded-full bg-gradient-to-r from-sky-500/15 via-emerald-400/15 to-sky-500/15 blur-3xl" />
       </div>
 
       <div className="mx-auto flex max-w-5xl flex-col gap-6">
-        {/* Header card */}
         <section className="relative overflow-hidden rounded-3xl border border-slate-200/80 bg-white/95 p-5 shadow-[0_18px_60px_rgba(15,23,42,0.14)] sm:p-6 md:p-7">
           <div className="pointer-events-none absolute -left-16 top-0 h-28 w-28 rounded-full bg-sky-500/20 blur-3xl" />
           <div className="pointer-events-none absolute -right-16 bottom-0 h-28 w-28 rounded-full bg-emerald-400/20 blur-3xl" />
@@ -92,7 +78,6 @@ export default async function Settings() {
           <div className="relative flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
             <div className="flex items-center gap-4">
               <div className="relative flex h-12 w-12 items-center justify-center rounded-2xl bg-slate-900 text-slate-50 shadow-sm ring-1 ring-slate-800/80">
-               {/* @ts-ignore */}
                 <span className="text-base font-semibold">{initials}</span>
                 <div className="pointer-events-none absolute inset-0 rounded-2xl bg-sky-500/30 blur-md opacity-0 transition group-hover:opacity-100" />
               </div>

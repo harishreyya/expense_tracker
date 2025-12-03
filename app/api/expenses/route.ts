@@ -44,7 +44,6 @@ export async function GET(req: Request) {
       if (to) {
         const toDate = new Date(to);
         if (!Number.isNaN(toDate.getTime())) {
-          // end of day
           toDate.setHours(23, 59, 59, 999);
           where.date.lte = toDate;
         }
