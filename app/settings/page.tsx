@@ -46,17 +46,35 @@ export default async function Settings() {
     where: { email: session?.user?.email }
   });
 
-  const initials =
-    user?.name
-      ?.split(" ")
-      .map((p:any) => p[0])
-      .join("")
-      .slice(0, 2)
-      .toUpperCase() ||
-        {/* @ts-ignore */}
-    session?.user?.email
-      .slice(0, 2)
-      .toUpperCase();
+  // const initials =
+  //   user?.name
+  //     ?.split(" ")
+  //     .map((p:any) => p[0])
+  //     .join("")
+  //     .slice(0, 2)
+  //     .toUpperCase() ||
+  //       {/* @ts-ignore */}
+  //   session?.user?.email
+  //     .slice(0, 2)
+  //     .toUpperCase();
+
+  const initials = (() => {
+    if (user?.name && typeof user.name === "string") {
+      return user.name
+        .split(" ")
+        .map(word => word[0])
+        .join("")
+        .slice(0, 2)
+        .toUpperCase();
+    }
+// @ts-ignore
+    if (session?.user?.email) {
+      // @ts-ignore
+      return session?.user?.email.slice(0, 2).toUpperCase();
+    }
+    return "US"; 
+  })();
+
 
   return (
     <main className="relative min-h-screen bg-slate-50 px-4 pb-12 pt-16">
