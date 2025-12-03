@@ -2,10 +2,11 @@ import { getServerSession } from "next-auth";
 import { authOptions } from "../../lib/auth";
 import { prisma } from "../../lib/prisma";
 import Link from "next/link";
+import ProfileNameEditor from "@/components/ProfileNameEditor";
 
 export default async function Settings() {
   const session = await getServerSession(authOptions as any);
-  {/* @ts-ignore */}
+  // @ts-ignore
   if (!session?.user?.email) {
     return (
       <main className="relative min-h-screen bg-slate-50 px-4 pb-12 pt-16">
@@ -41,28 +42,28 @@ export default async function Settings() {
     );
   }
 
+  // @ts-ignore
   const user = await prisma.user.findUnique({
-      // @ts-ignore 
-    where: { email: session?.user?.email }
+    // @ts-ignore
+    where: { email: session?.user?.email },
   });
 
   const initials = (() => {
     if (user?.name && typeof user.name === "string") {
       return user.name
         .split(" ")
-        .map(word => word[0])
+        .map((word) => word[0])
         .join("")
         .slice(0, 2)
         .toUpperCase();
     }
-// @ts-ignore
+    // @ts-ignore
     if (session?.user?.email) {
       // @ts-ignore
       return session?.user?.email.slice(0, 2).toUpperCase();
     }
-    return "US"; 
+    return "US";
   })();
-
 
   return (
     <main className="relative min-h-screen bg-slate-50 px-4 pb-12 pt-16">
@@ -123,7 +124,7 @@ export default async function Settings() {
                   </p>
                 </div>
                 <span className="rounded-full bg-slate-50 px-2 py-1 text-[10px] text-slate-500 ring-1 ring-slate-100">
-                  Read-only for now
+                  Name editable
                 </span>
               </div>
 
@@ -132,10 +133,9 @@ export default async function Settings() {
                   <label className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-500">
                     Name
                   </label>
-                  <div className="rounded-2xl border border-slate-200 bg-slate-50/70 px-3 py-2 text-sm text-slate-900">
-                    {user?.name || "—"}
-                  </div>
+                  <ProfileNameEditor initialName={user?.name ?? null} />
                 </div>
+
                 <div className="space-y-1.5">
                   <label className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-500">
                     Email
@@ -147,8 +147,8 @@ export default async function Settings() {
               </div>
 
               <div className="mt-3 text-[11px] text-slate-500">
-                Need to change your email or name? Use your authentication provider (Google) or
-                contact support to update your primary identity.
+                Your name is used in greetings, summaries, and quick views. Email remains your
+                primary login and may still be managed via Google / your auth provider.
               </div>
             </div>
 
