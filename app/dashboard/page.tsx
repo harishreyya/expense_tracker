@@ -96,7 +96,7 @@ export default async function DashboardPage() {
   }
 
   // @ts-ignore
-  const user = await prisma.user.findUnique({ where: { email: session?.user?.email } });
+  const user = await prisma.user.findUnique({ where: { email: session?.user?.email }});
   const rawExpenses = user ? await fetchExpenses(user?.id) : [];
 
   const expenses: Expense[] = rawExpenses.map((e: any) => ({
@@ -117,6 +117,15 @@ export default async function DashboardPage() {
       ? "No previous month data"
       : `${stats.trend > 0 ? "↑" : "↓"} ${Math.abs(stats.trend).toFixed(1)}% vs last month`;
 
+ const rawName = (user?.name ?? "").trim();
+  // @ts-ignore
+  const rawEmail = (session?.user?.email ?? "").trim();
+
+  const hasName = rawName.length > 0;
+  const displayLabel = hasName ? rawName : rawEmail || "there";
+  const greetingPrefix = hasName ? "Welcome back," : "Welcome,";
+
+
   return (
     <main className="min-h-screen px-4 pb-10 pt-16">
       <div className="mx-auto flex max-w-6xl flex-col gap-6">
@@ -129,10 +138,9 @@ export default async function DashboardPage() {
 
             <div className="relative space-y-3">
               <h1 className="text-2xl font-semibold tracking-tight text-slate-50 sm:text-3xl">
-                Welcome back,&nbsp;
+                {greetingPrefix}&nbsp;
                 <span className="bg-gradient-to-r from-sky-300 to-emerald-300 bg-clip-text font-semibold text-transparent">
-                  {/* @ts-ignore */}
-                  {session?.user?.name ?? session?.user?.email}
+                 {displayLabel}
                 </span>
               </h1>
               <p className="max-w-xl text-sm text-slate-300">
