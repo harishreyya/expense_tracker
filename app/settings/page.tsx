@@ -3,6 +3,7 @@ import { authOptions } from "../../lib/auth";
 import { prisma } from "../../lib/prisma";
 import Link from "next/link";
 import ProfileNameEditor from "@/components/ProfileNameEditor";
+import ProfileImageUploader from "@/components/ProfileImageUploader";
 
 export default async function Settings() {
   const session = await getServerSession(authOptions as any);
@@ -144,6 +145,13 @@ export default async function Settings() {
                     {user?.email}
                   </div>
                 </div>
+
+                <div className="space-y-1.5">
+  <label className="text-[11px] font-medium uppercase tracking-[0.18em] text-slate-500">
+    Profile Image
+  </label>
+  <ProfileImageUploader initialImage={user?.image ?? null} />
+</div>
               </div>
 
               <div className="mt-3 text-[11px] text-slate-500">
