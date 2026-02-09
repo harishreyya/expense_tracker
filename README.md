@@ -1,37 +1,83 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 🧾 AI-Powered Expense Tracker
 
-## Getting Started
+A production-ready full-stack web application that helps users track expenses, visualize spending patterns, and gain intelligent insights using natural language queries.
 
-First, run the development server:
+🔗 **Live Demo:** https://my-next-expense-prisma.vercel.app/
+
+---
+
+## 🚀 Features
+
+- Secure authentication using **NextAuth** (Email/Password + Google OAuth)
+- Protected routes for dashboard, analytics, and settings
+- Interactive expense dashboard with:
+  - Daily & monthly spending summaries
+  - Category-wise breakdowns
+  - Trend comparisons across months
+- **AI-powered natural language insights**
+  - Ask questions like *“How much did I spend on dining last month?”*
+  - Get AI-generated summaries and trends using OpenAI APIs
+- Dedicated **AI Insights** page with:
+  - Top spending categories
+  - Recurring subscription detection
+  - Smart saving recommendations
+- Expense analytics with charts and filters
+- User profile management with image upload, update, and delete
+- Fully responsive UI optimized for desktop and mobile
+
+---
+
+## 🧠 Tech Stack
+
+**Frontend**
+- Next.js (App Router)
+- React
+- TypeScript
+- Tailwind CSS
+
+**Backend**
+- Node.js
+- Next.js API Routes
+- Prisma ORM
+
+**Database**
+- MongoDB
+
+**AI & Automation**
+- OpenAI APIs
+- Prompt design for user-facing AI interactions
+
+**Auth & Media**
+- NextAuth
+- Cloudinary
+
+**Deployment**
+- Vercel
+
+---
+
+## 🏗 Architecture & Best Practices
+
+- Server-side rendering and dynamic routing using Next.js App Router
+- Secure API routes with session validation
+- Modular, scalable component structure
+- Type-safe database access with Prisma
+- Clean separation of UI, business logic, and data layers
+- Production-ready environment configuration
+
+---
+
+## 📦 Setup & Run Locally
 
 ```bash
+# Clone the repository
+git clone https://github.com/harishreyya/expense_tracker.git
+
+# Install dependencies
+npm install
+
+# Set environment variables
+# (NextAuth, MongoDB, OpenAI, Cloudinary)
+
+# Run the development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
-
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
-
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
-# expense_tracker
